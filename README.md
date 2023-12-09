@@ -48,4 +48,4 @@ This plugin provides a command to display the number of published posts by a spe
 
 ### Demo
 
-Login into the [Demo website](demo.shwetadanej.com/wp-admin) using username "demo" and password "demo" to see the working example.
+Login into the [Demo website](https://demo.shwetadanej.com/wp-admin/) using username "demo" and password "demo" to see the working example.
