@@ -24,7 +24,7 @@
  * @subpackage Sd_Wpcli_List_Posts/includes
  * @author     Shweta Danej <shwetadanej@gmail.com>
  */
-class Sd_Wpcli_List_Posts_i18n {
+class Sd_Wpcli_List_Posts_I18n {
 
 
 	/**
@@ -39,9 +39,5 @@ class Sd_Wpcli_List_Posts_i18n {
 			false,
 			dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/'
 		);
-
 	}
-
-
-
 }

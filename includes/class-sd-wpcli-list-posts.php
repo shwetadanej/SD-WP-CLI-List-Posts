@@ -82,13 +82,12 @@ class Sd_Wpcli_List_Posts {
 			$this->version = '1.0.0';
 		}
 		$this->plugin_name = 'sd-wpcli-list-posts';
-		$this->plugin_display_name = __("WP CLI LIST POST", "sd-wpcli-list-posts");
+		$this->plugin_display_name = __('WP CLI LIST POST', 'sd-wpcli-list-posts');
 
 		$this->load_dependencies();
 		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
-
 	}
 
 	/**
@@ -97,7 +96,7 @@ class Sd_Wpcli_List_Posts {
 	 * Include the following files that make up the plugin:
 	 *
 	 * - Sd_Wpcli_List_Posts_Loader. Orchestrates the hooks of the plugin.
-	 * - Sd_Wpcli_List_Posts_i18n. Defines internationalization functionality.
+	 * - Sd_Wpcli_List_Posts_I18n. Defines internationalization functionality.
 	 * - Sd_Wpcli_List_Posts_Admin. Defines all hooks for the admin area.
 	 * - Sd_Wpcli_List_Posts_Public. Defines all hooks for the public side of the site.
 	 *
@@ -113,33 +112,32 @@ class Sd_Wpcli_List_Posts {
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-sd-wpcli-list-posts-loader.php';
+		require_once plugin_dir_path( __DIR__ ) . 'includes/class-sd-wpcli-list-posts-loader.php';
 
 		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-sd-wpcli-list-posts-i18n.php';
+		require_once plugin_dir_path( __DIR__ ) . 'includes/class-sd-wpcli-list-posts-i18n.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-sd-wpcli-list-posts-admin.php';
+		require_once plugin_dir_path( __DIR__ ) . 'admin/class-sd-wpcli-list-posts-admin.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-sd-wpcli-list-posts-public.php';
+		require_once plugin_dir_path( __DIR__ ) . 'public/class-sd-wpcli-list-posts-public.php';
 
 		$this->loader = new Sd_Wpcli_List_Posts_Loader();
-
 	}
 
 	/**
 	 * Define the locale for this plugin for internationalization.
 	 *
-	 * Uses the Sd_Wpcli_List_Posts_i18n class in order to set the domain and to register the hook
+	 * Uses the Sd_Wpcli_List_Posts_I18n class in order to set the domain and to register the hook
 	 * with WordPress.
 	 *
 	 * @since    1.0.0
@@ -147,10 +145,9 @@ class Sd_Wpcli_List_Posts {
 	 */
 	private function set_locale() {
 
-		$plugin_i18n = new Sd_Wpcli_List_Posts_i18n();
+		$plugin_i18n = new Sd_Wpcli_List_Posts_I18n();
 
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
-
 	}
 
 	/**
@@ -168,7 +165,6 @@ class Sd_Wpcli_List_Posts {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'sd_cli_option_page' );
 		$this->loader->add_action( 'wp_ajax_sd_cli_command_execute', $plugin_admin, 'sd_cli_command_execute' );
-
 	}
 
 	/**
@@ -185,7 +181,6 @@ class Sd_Wpcli_List_Posts {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 		$this->loader->add_action( 'cli_init', $plugin_public, 'sd_cli_register_commands' );
-		
 	}
 
 	/**
@@ -237,5 +232,4 @@ class Sd_Wpcli_List_Posts {
 	public function get_version() {
 		return $this->version;
 	}
-
 }

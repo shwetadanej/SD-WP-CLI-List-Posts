@@ -19,8 +19,6 @@
  * Version:           1.0.0
  * Author:            Shweta Danej
  * Author URI:        https://shwetadanej.com/
- * License:           GPL-2.0+
- * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       sd-wpcli-list-posts
  * Domain Path:       /languages
  */
@@ -77,6 +75,5 @@ function run_sd_wpcli_list_posts() {
 
 	$plugin = new Sd_Wpcli_List_Posts();
 	$plugin->run();
-
 }
 run_sd_wpcli_list_posts();

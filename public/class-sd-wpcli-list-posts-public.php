@@ -51,7 +51,6 @@ class Sd_Wpcli_List_Posts_Public {
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
-
 	}
 
 	/**
@@ -74,7 +73,6 @@ class Sd_Wpcli_List_Posts_Public {
 		 */
 
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/sd-wpcli-list-posts-public.css', array(), $this->version, 'all' );
-
 	}
 
 	/**
@@ -97,7 +95,6 @@ class Sd_Wpcli_List_Posts_Public {
 		 */
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/sd-wpcli-list-posts-public.js', array( 'jquery' ), $this->version, false );
-
 	}
 
 	/**
@@ -124,9 +121,8 @@ class Sd_Wpcli_List_Posts_Public {
      *     wp author-posts-count
      *
      */
-	public function sd_cli_register_commands()
-    {
-        WP_CLI::add_command('author-posts-count',  array($this, 'author_posts_count'));
+	public function sd_cli_register_commands() {
+        WP_CLI::add_command('author-posts-count',  array( $this, 'author_posts_count' ));
     }
 
 	/**
@@ -136,8 +132,7 @@ class Sd_Wpcli_List_Posts_Public {
 	 * @param array $assoc_args
 	 * @return void
 	 */
-	public function author_posts_count($args, $assoc_args)
-    {
+	public function author_posts_count( $args, $assoc_args ) {
         $author = isset($assoc_args['author']) ? $assoc_args['author'] : (isset($assoc_args['a']) ? $assoc_args['a'] : '');
 
         $post_type = isset($assoc_args['post_type']) ? $assoc_args['post_type'] : 'post';
@@ -155,7 +150,7 @@ class Sd_Wpcli_List_Posts_Public {
                     return;
                 }
             } else {
-                $all_users = get_users(array('fields' => array('ID', 'user_login')));
+                $all_users = get_users(array( 'fields' => array( 'ID', 'user_login' ) ));
                 foreach ($all_users as $user) {
                     $author_id = $user->ID;
                     $total_posts = count_user_posts($author_id, $post_type);
@@ -167,5 +162,4 @@ class Sd_Wpcli_List_Posts_Public {
             WP_CLI::error('Given post type is invalid');
         }
     }
-
 }

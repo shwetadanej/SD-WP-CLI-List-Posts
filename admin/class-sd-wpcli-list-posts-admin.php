@@ -20,8 +20,8 @@
  * @subpackage Sd_Wpcli_List_Posts/admin
  * @author     Shweta Danej <shwetadanej@gmail.com>
  */
-class Sd_Wpcli_List_Posts_Admin
-{
+class Sd_Wpcli_List_Posts_Admin {
+
 
 	/**
 	 * The ID of this plugin.
@@ -57,8 +57,7 @@ class Sd_Wpcli_List_Posts_Admin
 	 * @param      string    $plugin_name       The name of this plugin.
 	 * @param      string    $version    The version of this plugin.
 	 */
-	public function __construct($plugin_name, $version, $plugin_display_name)
-	{
+	public function __construct( $plugin_name, $version, $plugin_display_name ) {
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
@@ -70,8 +69,7 @@ class Sd_Wpcli_List_Posts_Admin
 	 *
 	 * @since    1.0.0
 	 */
-	public function enqueue_styles()
-	{
+	public function enqueue_styles() {
 
 		/**
 		 * This function is provided for demonstration purposes only.
@@ -93,8 +91,7 @@ class Sd_Wpcli_List_Posts_Admin
 	 *
 	 * @since    1.0.0
 	 */
-	public function enqueue_scripts()
-	{
+	public function enqueue_scripts() {
 
 		/**
 		 * This function is provided for demonstration purposes only.
@@ -108,7 +105,7 @@ class Sd_Wpcli_List_Posts_Admin
 		 * class.
 		 */
 
-		wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/sd-wpcli-list-posts-admin.js', array('jquery'), $this->version, false);
+		wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/sd-wpcli-list-posts-admin.js', array( 'jquery' ), $this->version, false);
 	}
 
 	/**
@@ -116,14 +113,13 @@ class Sd_Wpcli_List_Posts_Admin
 	 *
 	 * @return void
 	 */
-	public function sd_cli_option_page()
-	{
+	public function sd_cli_option_page() {
 		add_menu_page(
 			$this->plugin_display_name,
 			$this->plugin_display_name,
 			'edit_posts',
 			$this->plugin_name,
-			array($this,'sd_wp_cli_menu_page_callback'),
+			array( $this,'sd_wp_cli_menu_page_callback' ),
 			'dashicons-admin-generic',
 		);
 	}
@@ -133,8 +129,7 @@ class Sd_Wpcli_List_Posts_Admin
 	 *
 	 * @return void
 	 */
-	public function sd_wp_cli_menu_page_callback()
-	{
+	public function sd_wp_cli_menu_page_callback() {
 		require_once plugin_dir_path( __FILE__ ) . '/partials/sd-wpcli-list-posts-admin-display.php';
 	}
 
@@ -143,41 +138,40 @@ class Sd_Wpcli_List_Posts_Admin
 	 *
 	 * @return void
 	 */
-	public function sd_cli_command_execute(){
+	public function sd_cli_command_execute() {
 		$data =  array();
 		$data['status'] = false;
-		$data['message'] = __("Something went wrong, please try again.", "sd-wpcli-list-posts");
+		$data['message'] = __('Something went wrong, please try again.', 'sd-wpcli-list-posts');
 		if (isset($_POST['sd_cli_command_execute_nonce']) && wp_verify_nonce($_POST['sd_cli_command_execute_nonce'], 'sd_cli_command_execute_action')) {
 			$is_valid_user = true;
 			$is_valid_post_type = true;
 			$author= sanitize_text_field($_POST['sd_cli_command_author']);
 			$post_type = sanitize_text_field($_POST['sd_cli_command_post_type']);
-			$command_to_execute = "wp author-posts-count ";
-			if($author){
+			$command_to_execute = 'wp author-posts-count ';
+			if ($author) {
 				$user = get_user_by('login', $author);
-				if($user){
+				if ($user) {
 					$is_valid_user = true;
-					$command_to_execute .= "--a=".$author;
-				}else{
+					$command_to_execute .= '--a='.$author;
+				} else {
 					$is_valid_user = false;
 				}
 			}
 
-			if($post_type){
-				if(post_type_exists($post_type)){
-					$command_to_execute .= "--post_type=".$post_type;
-				}else{
+			if ($post_type) {
+				if (post_type_exists($post_type)) {
+					$command_to_execute .= '--post_type='.$post_type;
+				} else {
 					$is_valid_post_type = false;
 				}
 			}
 
-			if(!$is_valid_user || !$is_valid_post_type){
-				$data['message'] = __("Author or Post type does not exist.", "sd-wpcli-list-posts");
-			}else{
+			if (!$is_valid_user || !$is_valid_post_type) {
+				$data['message'] = __('Author or Post type does not exist.', 'sd-wpcli-list-posts');
+			} else {
 				$data['message'] = nl2br(shell_exec($command_to_execute));
 				$data['status'] = true;
 			}
-
 		}
 		
 		wp_send_json_success($data);

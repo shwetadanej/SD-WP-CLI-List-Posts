@@ -30,7 +30,5 @@ class Sd_Wpcli_List_Posts_Activator {
 	 * @since    1.0.0
 	 */
 	public static function activate() {
-
 	}
-
 }
