@@ -46,6 +46,12 @@ This plugin provides a command to display the number of published posts by a spe
     5. wp author-posts-count --post_type=movie
     6. wp author-posts-count
 
+### Coding Standards
+
+- Library Used: [WordPress Coding Standard](https://github.com/WordPress/WordPress-Coding-Standards)
+- Coding Standard: Php Code Sniffer
+
+
 ### Demo
 
 Login into the [Demo website](https://demo.shwetadanej.com/wp-admin/) using username "demo" and password "demo" to see the working example.
